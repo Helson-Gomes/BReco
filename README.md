@@ -8,4 +8,4 @@ You can to download data about:
 * Annual average temperature (using the function *get_temperature*);
 * Annual average rainfall (using the function *get_rainfall*);
 * Anual greenhouse gas emissions (using the function *get_seeg*);
-* Increase in deforestation, non-forest area, forest area, hydrography, cloud cover and deforested area in the Brazilian Legal Amazon (using the function *get_prodes*);
+* Increase in deforestation, non-forest area, forest area, hydrography, cloud cover and deforested area in the Brazilian Legal Amazon (using the function *get_prodes*).
