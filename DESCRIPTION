@@ -8,6 +8,6 @@ Description: With the BReco package, you can to download main brazilian environm
 License: GPL-3
 Encoding: UTF-8
 LazyData: TRUE
-imports: dplyr, tidyr, readxl
 RoxygenNote: 7.0.2
 Repository: CRAN
+BugReports: https://github.com/Helson-Gomes/BReco

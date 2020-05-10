@@ -5,7 +5,6 @@
 #' @param gas The type of gas required
 
 get_seeg <- function(state = NULL, activity = NULL, gas = NULL, type_data = NULL, panel = FALSE){
-  lapply(c("dplyr", "tidyr", "openxlsx"), require, character.only = TRUE)
   if(is.null(activity) == FALSE){
     if(activity %in% c('agriculture', 'energy', 'land use change', 'industry', 'waste') == FALSE){
       stop('\n
@@ -42,8 +41,8 @@ get_seeg <- function(state = NULL, activity = NULL, gas = NULL, type_data = NULL
   }
   print('----- Wait for the data to download! -----')
 
-  data <- read.xlsx('https://github.com/Helson-Gomes/dadostse/raw/master/SEEG.xlsx') %>%
-    rename(setor = 1)
+  data <- openxlsx::read.xlsx('https://github.com/Helson-Gomes/dadostse/raw/master/SEEG.xlsx')
+  data <- dplyr::rename(data, setor = 1)
   if(is.null(state) == FALSE){
     data<- subset(data, Estado == state)
   }
@@ -76,11 +75,11 @@ get_seeg <- function(state = NULL, activity = NULL, gas = NULL, type_data = NULL
     }
   }
   if(panel == TRUE){
-    data <- data %>% gather(year, value, '1970':'2018') %>%
-      select(1,7,8,9,12,13)
+    data <- tidyr::gather(data, year, value, '1970':'2018')
+    data <- dplyr::select(data, 1,7,8,9,12,13)
   }
   if(panel == FALSE){
-    data <- data %>% select(1, 7, 8, 9, 12:60)
+    data <- dplyr::select(data, 1, 7, 8, 9, 12:60)
   }
   if(panel %in% c(FALSE, TRUE) == FALSE){
     stop('\n

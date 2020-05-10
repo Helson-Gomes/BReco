@@ -33,7 +33,7 @@
   Thau, S. V. Stehman, S. J. Goetz, T. R. Loveland, A. Kommareddy, A. Egorov, L. Chini, C. O.
   Justice, and J. R. G. Townshend. 2013. ???High-Resolution Global Maps of 21st-Century Forest
   Cover Change.??? Science 342 (15 November): 850???53. Data available on-line from:
-  http://earthenginepartners.appspot.com/science-2013-global-forest.}
+  \url{http://earthenginepartners.appspot.com/science-2013-global-forest.}}
 \note{Pleace, cite: Zarin, D., Harris, N.L. et al. 2016. Can carbon emissions drop by 50\% in five years? Global Change Biology, 22: 1336-1347. doi:10.1111/gcb.13153}
-\note{Pleace, cite: Global Administrative Areas Database, version 3.6. Available at http://gadm.org/}
+\note{Pleace, cite: Global Administrative Areas Database, version 3.6. Available at \url{http://gadm.org/}}
 

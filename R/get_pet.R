@@ -3,15 +3,14 @@
 #' @param panel Option to download data in panel data format
 
 get_pet <- function(level = 'municipality', panel = FALSE){
-  lapply(c("dplyr", "tidyr", "openxlsx"), require, character.only = TRUE)
   if(level == 'municipality'){
     print('Please, wait for the data to download!')
-    dt <- read.xlsx('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/12c62131af3179cbb4f21903ecd652b1/PET_1901_2012.xlsx')
+    dt <- openxlsx::read.xlsx('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/12c62131af3179cbb4f21903ecd652b1/PET_1901_2012.xlsx')
   }
   if(level == 'state'){
     print('Please, wait for the data to download!')
-    dt <- read.xlsx('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/12c62131af3179cbb4f21903ecd652b1/PET_1901_2012.xlsx') %>%
-      mutate(cod.state = substr(CD_GEOCMU, 1, 2),
+    dt <- openxlsx::read.xlsx('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/12c62131af3179cbb4f21903ecd652b1/PET_1901_2012.xlsx')
+    dt <- dplyr::mutate(dt, cod.state = substr(CD_GEOCMU, 1, 2),
              sigla.state = ifelse(cod.state == '11', 'RO' , 'DF'),
              sigla.state = ifelse(cod.state == '12', 'AC' , sigla.state), sigla.state = ifelse(cod.state == '13', 'AM' , sigla.state),
              sigla.state = ifelse(cod.state == '14', 'RR' , sigla.state), sigla.state = ifelse(cod.state == '15', 'PA' , sigla.state),
@@ -25,18 +24,21 @@ get_pet <- function(level = 'municipality', panel = FALSE){
              sigla.state = ifelse(cod.state == '35', 'SP' , sigla.state), sigla.state = ifelse(cod.state == '41', 'PR' , sigla.state),
              sigla.state = ifelse(cod.state == '42', 'SC' , sigla.state), sigla.state = ifelse(cod.state == '43', 'RS' , sigla.state),
              sigla.state = ifelse(cod.state == '50', 'MS' , sigla.state), sigla.state = ifelse(cod.state == '51', 'MT' , sigla.state),
-             sigla.state = ifelse(cod.state == '52', 'GO' , sigla.state)) %>%
-      group_by(sigla.state, cod.state) %>% summarise_at(vars(4:115), funs(mean))
+             sigla.state = ifelse(cod.state == '52', 'GO' , sigla.state))
+    dt <- dplyr::group_by(dt, sigla.state, cod.state)
+    dt <- dplyr::summarise_at(dt, 4:115, mean)
   }
   if(level == 'country'){
     print('Please, wait for the data to download!')
-    dt <- read.xlsx('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/12c62131af3179cbb4f21903ecd652b1/PET_1901_2012.xlsx') %>%
-      mutate(country = 'Brazil') %>% group_by(country) %>%
-      summarise_at(vars(4:115), funs(mean))
+    dt <- openxlsx::read.xlsx('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/12c62131af3179cbb4f21903ecd652b1/PET_1901_2012.xlsx')
+    dt <- dplyr::mutate(dt, country = 'Brazil')
+    dt <- dplyr::group_by(dt, country)
+    dt <- dplyr::summarise_at(dt, 4:115, mean)
   }
   if(panel == TRUE){
-    dt<-dt %>% gather(v1, evapotranspiration, 'PET_1901':'PET_2012') %>%
-      mutate(year = substr(v1, 5,8)) %>% select(-v1)
+    dt<- tidyr::gather(dt, v1, evapotranspiration, 'PET_1901':'PET_2012')
+    dt <- dplyr::mutate(dt, year = substr(v1, 5,8))
+    dt <- dplyr::select(dt, -v1)
   }
   if(level %in% c('municipality', 'state', 'country') == FALSE | panel %in% c(T, F) == FALSE){
     stop('\n

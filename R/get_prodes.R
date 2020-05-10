@@ -3,7 +3,6 @@
 #' @param state The abbreviation for the name of the state of the Legal Amazon
 
 get_prodes <- function(year = NULL, state = NULL){
-  lapply(c("dplyr", "tidyr", "openxlsx"), require, character.only = TRUE)
   if(year %in% c(2002:2018) == FALSE){
     stop('\n
     -------------------------------------------- \n
@@ -18,8 +17,7 @@ get_prodes <- function(year = NULL, state = NULL){
         Please, choose a valid Legal Amazon state code! \n
         -----------------------------------------------')
       } else{
-        dt <- dt %>%
-          filter(Estado == state)
+        dt <- dplyr::filter(dt, Estado == state)
       }
     }
   }

@@ -3,7 +3,6 @@
 #' @param level The territorial level required
 
 get_gfw <- function(type_data = NULL, level = NULL){
-  lapply(c("dplyr", "tidyr", "openxlsx"), require, character.only = TRUE)
   if(is.null(type_data) == FALSE){
     if(is.null(level) == FALSE){
       if(level %in% c('Country', 'Subnational 1', 'Subnational 2') == FALSE){
@@ -25,7 +24,7 @@ get_gfw <- function(type_data = NULL, level = NULL){
       --------------------------------')
     }
     print('Please, wait for the data to download!')
-    df <- read.xlsx('https://gfw2-data.s3.amazonaws.com/country-pages/country_stats/download/BRA.xlsx', sheet = paste(level, type_data))
+    df <- openxlsx::read.xlsx('https://gfw2-data.s3.amazonaws.com/country-pages/country_stats/download/BRA.xlsx', sheet = paste(level, type_data))
 
 
   }else{
