@@ -3,6 +3,8 @@
 #' @param state The abbreviation for the name of the state of the Legal Amazon
 
 get_prodes <- function(year = NULL, state = NULL){
+  # The code below help to avoid the note "no visible binding for global variable [variable name]"
+  Estado <- NULL
   if(year %in% c(2002:2018) == FALSE){
     stop('\n
     -------------------------------------------- \n
@@ -27,3 +29,5 @@ get_prodes <- function(year = NULL, state = NULL){
   ---------------------------------------------------------------------')
   return(dt)
 }
+
+

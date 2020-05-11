@@ -9,5 +9,6 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: TRUE
 RoxygenNote: 7.0.2
+imports: dplyr, tidyr, readxl
 Repository: CRAN
 BugReports: https://github.com/Helson-Gomes/BReco

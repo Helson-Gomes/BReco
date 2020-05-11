@@ -3,13 +3,18 @@
 #' @param panel Option to download data in panel data format
 
 get_pet <- function(level = 'municipality', panel = FALSE){
+  # The code below help to avoid the note "no visible binding for global variable [variable name]"
+  CD_GEOCMU <- cod.state <- sigla.state <- country <- v1 <- evapotranspiration <- NULL
+  temp <- tempfile()
   if(level == 'municipality'){
-    print('Please, wait for the data to download!')
-    dt <- openxlsx::read.xlsx('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/12c62131af3179cbb4f21903ecd652b1/PET_1901_2012.xlsx')
+    message('Please, wait for the data to download!')
+    download.file('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/12c62131af3179cbb4f21903ecd652b1/PET_1901_2012.xlsx', temp, quiet = T)
+    dt <- readxl::read_excel(temp, 1)
   }
   if(level == 'state'){
-    print('Please, wait for the data to download!')
-    dt <- openxlsx::read.xlsx('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/12c62131af3179cbb4f21903ecd652b1/PET_1901_2012.xlsx')
+    message('Please, wait for the data to download!')
+    download.file('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/12c62131af3179cbb4f21903ecd652b1/PET_1901_2012.xlsx', temp, quiet = T)
+    dt <- readxl::read_excel(temp, 1)
     dt <- dplyr::mutate(dt, cod.state = substr(CD_GEOCMU, 1, 2),
              sigla.state = ifelse(cod.state == '11', 'RO' , 'DF'),
              sigla.state = ifelse(cod.state == '12', 'AC' , sigla.state), sigla.state = ifelse(cod.state == '13', 'AM' , sigla.state),
@@ -29,8 +34,9 @@ get_pet <- function(level = 'municipality', panel = FALSE){
     dt <- dplyr::summarise_at(dt, 4:115, mean)
   }
   if(level == 'country'){
-    print('Please, wait for the data to download!')
-    dt <- openxlsx::read.xlsx('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/12c62131af3179cbb4f21903ecd652b1/PET_1901_2012.xlsx')
+    message('Please, wait for the data to download!')
+    download.file('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/12c62131af3179cbb4f21903ecd652b1/PET_1901_2012.xlsx', temp, quiet = T)
+    dt <- readxl::read_excel(temp, 1)
     dt <- dplyr::mutate(dt, country = 'Brazil')
     dt <- dplyr::group_by(dt, country)
     dt <- dplyr::summarise_at(dt, 4:115, mean)
@@ -46,6 +52,7 @@ get_pet <- function(level = 'municipality', panel = FALSE){
     Please, enter a valid value to level or panel parameter! \n
     -------------------------------------------------------- \n')
   }
+  unlink(temp)
   warning('\n
   -------------------------------------------------- \n
   Please, cite https://www.globalclimatemonitor.org/ \n
@@ -57,3 +64,5 @@ get_pet <- function(level = 'municipality', panel = FALSE){
   -------------------------------------------------- ')
   return(dt)
 }
+
+

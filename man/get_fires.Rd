@@ -23,4 +23,4 @@
 \examples{
   my_df <- get_fires(level = "state", panel = FALSE)
 }
-\note{Please, cite: \url{https://earthdata.nasa.gov/earth-observation-data/near-real-time/firms}}
+\note{Please, cite: https://earthdata.nasa.gov/earth-observation-data/near-real-time/firms}

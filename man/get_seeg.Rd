@@ -28,4 +28,4 @@ Download data from Greenhouse Gas Emissions and Removal Estimation System ("Sist
 \examples{
 my_df <- get_seeg(state = NULL, activity = NULL, type_data = NULL, panel = TRUE)
 }
-\note{Please, cite \url{seeg.eco.br}.}
+\note{Please, cite: seeg.eco.br.}

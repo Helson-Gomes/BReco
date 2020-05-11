@@ -33,4 +33,4 @@ my_df <- get_prodes(year = 2018, state = NULL)
 \item{Hidrografia}{Hydrography areas.}
 \item{Soma}{Percentage of the monitored area in relation to the total area.}
 }
-\note{Pleace,cite: \url{http://www.dpi.inpe.br/prodesdigital/prodesmunicipal.php}.}
+\note{Pleace,cite: http://www.dpi.inpe.br/prodesdigital/prodesmunicipal.php.}

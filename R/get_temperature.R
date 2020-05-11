@@ -3,13 +3,18 @@
 #' @param panel Option to download data in panel data formt
 
 get_temperature <- function(level = 'municipality', panel = FALSE){
+  # The code below help to avoid the note "no visible binding for global variable [variable name]"
+  CD_GEOCMU <- cod.state <- sigla.state <- country <- v1 <- temperature <- NULL
+  temp<- tempfile()
   if(level == 'municipality'){
-    print('Please, wait for the data to download!')
-    dt <- openxlsx::read.xlsx('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/770f4bdff850c0b9c35113e131999ff2/TEMPERATURA_1901_2019.xlsx')
+    message('Please, wait for the data to download!')
+    download.file('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/770f4bdff850c0b9c35113e131999ff2/TEMPERATURA_1901_2019.xlsx', temp, quiet = T)
+    dt <- readxl::read_excel(temp, 1)
   }
   if(level == 'state'){
-    print('Please, wait for the data to download!')
-    dt <- openxlsx::read.xlsx('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/770f4bdff850c0b9c35113e131999ff2/TEMPERATURA_1901_2019.xlsx')
+    message('Please, wait for the data to download!')
+    download.file('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/770f4bdff850c0b9c35113e131999ff2/TEMPERATURA_1901_2019.xlsx', temp, quiet = T)
+    dt <- readxl::read_excel(temp, 1)
     dt <- dplyr::mutate(dt, cod.state = substr(CD_GEOCMU, 1, 2),
              sigla.state = ifelse(cod.state == '11', 'RO' , 'DF'),
              sigla.state = ifelse(cod.state == '12', 'AC' , sigla.state), sigla.state = ifelse(cod.state == '13', 'AM' , sigla.state),
@@ -29,8 +34,9 @@ get_temperature <- function(level = 'municipality', panel = FALSE){
     dt <- dplyr::summarise_at(dt, 5:123, mean)
   }
   if(level == 'country'){
-    print('Please, wait for the data to download!')
-    dt <- openxlsx::read.xlsx('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/770f4bdff850c0b9c35113e131999ff2/TEMPERATURA_1901_2019.xlsx')
+    message('Please, wait for the data to download!')
+    download.file('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/770f4bdff850c0b9c35113e131999ff2/TEMPERATURA_1901_2019.xlsx', temp, quiet = T)
+    dt <- readxl::read_excel(temp, 1)
     dt <- dplyr::mutate(dt, country = 'Brazil')
     dt <- dplyr::group_by(dt, country)
     dt <- dplyr::summarise_at(dt, 5:123, mean)
@@ -57,3 +63,5 @@ get_temperature <- function(level = 'municipality', panel = FALSE){
   -------------------------------------------------- ')
   return(dt)
 }
+
+

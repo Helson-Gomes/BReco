@@ -26,5 +26,5 @@
 \examples{
   my_df <- get_pet(level = "state", panel = FALSE)
 }
-\note{Please, cite: \url{https://www.globalclimatemonitor.org/}}
+\note{Please, cite: https://www.globalclimatemonitor.org/}
 \note{Please, cite: CAMARILLO-NARANJO, Juan Mariano et al. The global climate monitor system: from climate data-handling to knowledge dissemination. International journal of digital earth, v. 12, n. 4, p. 394-414, 2019.}

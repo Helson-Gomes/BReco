@@ -3,17 +3,25 @@
 #' @param panel Option to download data in panel data formt
 
 get_fires <- function(level = NULL, panel = FALSE){
+  # The code below help to avoid the note "no visible binding for global variable [variable name]"
+  CD_GEOCMU <-  cod.state <- sigla.state <- year <- country <- fires <- v1 <- NULL
+
+
+  temp <- tempfile()
   if(is.null(level) == TRUE){
-    print('Pleace, wait for the data to download!')
-    dt <- openxlsx::read.xlsx ('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/16378a8eeeb8d1651493fe4e9606cf51/INCENDIOS_2001_2019.xlsx')
+    message('Pleace, wait for the data to download!')
+    download.file('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/16378a8eeeb8d1651493fe4e9606cf51/INCENDIOS_2001_2019.xlsx', temp, quiet = T)
+    dt <- readxl::read_excel(temp, 1)
   }else{
     if(level == 'municipality'){
-      print('Pleace, wait for the data to download!')
-      dt <-openxlsx::read.xlsx('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/16378a8eeeb8d1651493fe4e9606cf51/INCENDIOS_2001_2019.xlsx')
+      message('Pleace, wait for the data to download!')
+      download.file('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/16378a8eeeb8d1651493fe4e9606cf51/INCENDIOS_2001_2019.xlsx', temp, quiet = T)
+      dt <- readxl::read_excel(temp, 1)
     }
     if(level == 'state'){
-      print('Pleace, wait for the data to download!')
-      dt <- openxlsx::read.xlsx('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/16378a8eeeb8d1651493fe4e9606cf51/INCENDIOS_2001_2019.xlsx')
+      message('Pleace, wait for the data to download!')
+      download.file('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/16378a8eeeb8d1651493fe4e9606cf51/INCENDIOS_2001_2019.xlsx', temp, quiet = T)
+      dt <- readxl::read_excel(temp, 1)
         dt <- dplyr::mutate(dt, cod.state = substr(CD_GEOCMU, 1, 2),
                sigla.state = ifelse(cod.state == '11', 'RO' , 'DF'),
                sigla.state = ifelse(cod.state == '12', 'AC' , sigla.state), sigla.state = ifelse(cod.state == '13', 'AM' , sigla.state),
@@ -33,8 +41,9 @@ get_fires <- function(level = NULL, panel = FALSE){
         dt<- dplyr::summarise_at(dt, 2:20, sum)
     }
     if(level == 'country'){
-      print('Pleace, wait for the data to download!')
-      dt <- openxlsx::read.xlsx('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/16378a8eeeb8d1651493fe4e9606cf51/INCENDIOS_2001_2019.xlsx')
+      message('Pleace, wait for the data to download!')
+      download.file('https://trello-attachments.s3.amazonaws.com/5ea83f462064047eed09f846/5ea83fc7d5707865983b4f14/16378a8eeeb8d1651493fe4e9606cf51/INCENDIOS_2001_2019.xlsx', temp, quiet = T)
+      dt <- readxl::read_excel(temp, 1)
       dt<- dplyr::mutate(dt, country = 'Brazil')
       dt<-dplyr::group_by(dt, country)
       dt <- dplyr::summarise_at(dt, 2:20, sum)
@@ -45,9 +54,12 @@ get_fires <- function(level = NULL, panel = FALSE){
     dt <- dplyr::mutate(dt, year = substr(v1, 6, 9))
     dt <- dplyr::select(dt, -v1)
   }
+  unlink(temp)
   warning('\n
   -------------------------------------------------------------------------------------- \n
   Please, cite https://earthdata.nasa.gov/earth-observation-data/near-real-time/firms \n
   -------------------------------------------------------------------------------------- ')
   return(dt)
 }
+
+
