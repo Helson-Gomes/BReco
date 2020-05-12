@@ -9,8 +9,8 @@ Download data from Greenhouse Gas Emissions and Removal Estimation System ("Sist
 }
 \details{If you choose panel = FALSE, the value of the greenhouse gas emissions or removals will be returned in columns named with the number of each year.}
 \arguments{
-\item{state}{A brazilian state code ("AC", "AM", "PA", "RO", "RR", "AP", "TO", "MA", "PI", "CE", "RN", "PB", "PE", "AL", "SE", "BA", "ES", "MG", "SP", "RJ", "PR", "SC", "RS", "MS", "MT", "GO")}
-\item{activity}{An economical activity ("agriculture", "energy", "land use change", "industry", "waste")}
+\item{state}{The brazilian state code ("AC", "AM", "PA", "RO", "RR", "AP", "TO", "MA", "PI", "CE", "RN", "PB", "PE", "AL", "SE", "BA", "ES", "MG", "SP", "RJ", "PR", "SC", "RS", "MS", "MT", "GO")}
+\item{activity}{The economical activity ("agriculture", "energy", "land use change", "industry", "waste")}
 \item{gas}{The type of gas of interest ("CO2e (t) GTP-AR2", "CO2e (t) GTP-AR4", "CO2e (t) GTP-AR5", "CO2e (t) GWP-AR2",
 "CO2e (t) GWP-AR4", "CO2e (t) GWP-AR5", "CO2 (t)", "CO (t)", "CH4 (t)", "NOx (t)", "N2O (t)", "COVNM (t)", "CF4 (t)", "C2F6 (t)",
 "SF6 (t)", "HFC-23 (t)", "HFC-32 (t)", "HFC-134a (t)", "HFC-125 (t)", "HFC-143a (t)", "HFC-152a (t)", "NOX (t)" }

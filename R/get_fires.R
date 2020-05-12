@@ -1,7 +1,3 @@
-#' Download data from Fire Information for Resource Management System (FIRMS) to Brazil
-#' @param level The territorial level required
-#' @param panel Option to download data in panel data formt
-
 get_fires <- function(level = NULL, panel = FALSE){
   # The code below help to avoid the note "no visible binding for global variable [variable name]"
   CD_GEOCMU <-  cod.state <- sigla.state <- year <- country <- fires <- v1 <- NULL

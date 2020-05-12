@@ -1,7 +1,3 @@
-#' Download data about brazilian anual mean evapotranspiration index according to CAMARILLO-NARANJO et al (2019)
-#' @param level The territorial level required
-#' @param panel Option to download data in panel data format
-
 get_pet <- function(level = 'municipality', panel = FALSE){
   # The code below help to avoid the note "no visible binding for global variable [variable name]"
   CD_GEOCMU <- cod.state <- sigla.state <- country <- v1 <- evapotranspiration <- NULL

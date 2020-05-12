@@ -1,7 +1,3 @@
-#' Download the data from the General Coordination for Earth Observation in Brazil (PRODES)
-#' @param year The value of the year required
-#' @param state The abbreviation for the name of the state of the Legal Amazon
-
 get_prodes <- function(year = NULL, state = NULL){
   # The code below help to avoid the note "no visible binding for global variable [variable name]"
   Estado <- NULL

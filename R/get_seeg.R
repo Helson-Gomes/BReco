@@ -1,9 +1,3 @@
-#' Brazilian environmental data
-#' @param year An year between 1970 and 2018
-#' @param state A brazilian state code ('AC', 'AM', 'PA', 'RO', 'RR', 'AP', 'TO', 'MA', 'PI', 'CE', 'RN', 'PB', 'PE', 'AL', 'SE', 'BA', 'ES', 'MG', 'SP', 'RJ', 'PR', 'SC', 'RS', 'MS', 'MT', 'GO')
-#' @param activity An economical activity ('agriculture', 'energy', 'land use change', 'industry', 'waste')
-#' @param gas The type of gas required
-
 get_seeg <- function(state = NULL, activity = NULL, gas = NULL, type_data = NULL, panel = FALSE){
   # The code below help to avoid the note "no visible binding for global variable [variable name]"
   Estado <- setor <- Gas <- Emissao_Remocao <- year <- value <- NULL

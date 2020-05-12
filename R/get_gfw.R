@@ -1,7 +1,3 @@
-#' Download brasilian statistics about tree cover loss, CO2 emissions data based on aboveground biomass loss, and biomass loss informations available in "https://www.globalforestwatch.org/".
-#' @param type_data The type of data required
-#' @param level The territorial level required
-
 get_gfw <- function(type_data = NULL, level = NULL){
   utils::globalVariables()
   temp <- tempfile()

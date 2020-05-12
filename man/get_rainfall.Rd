@@ -12,8 +12,8 @@
   \item{panel}{Use panel = TRUE if you want to download the database in a panel data format and panel = FALSE otherwise. The default value is FALSE}
 }
 \value{
-\item{YCNTRD}{The central longitude coordinate of the geographical area of interest.}
-\item{XCNTRD}{The central latitude coordinate of the geographical area of interest.}
+\item{YCNTRD}{The centroid longitude coordinate of the geographical area of interest.}
+\item{XCNTRD}{The centroid latitude coordinate of the geographical area of interest.}
 \item{CD_GEOCMU}{Municipality identification code according to the Brazilian Institute of Geography and Statistics (IBGE). This variable will not appear if you choose the option level = "country" or level = "state".}
 \item{sigla.state}{The state name abbreviation. This variable will not appear if you choose the option level = "country" or level = "municipality".}
 \item{code.state}{The state identification code according to the Brazilian Institute of Geography and Statistics (Instituto Brasileiro de Geografia e Estatistica - IBGE). This variable will not appear if you choose the option level = "country" or level = "municipality".}
