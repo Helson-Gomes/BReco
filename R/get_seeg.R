@@ -1,7 +1,6 @@
 get_seeg <- function(state = NULL, activity = NULL, gas = NULL, type_data = NULL, panel = FALSE){
   # The code below help to avoid the note "no visible binding for global variable [variable name]"
   Estado <- setor <- Gas <- Emissao_Remocao <- year <- value <- NULL
-  temp <- tempfile()
   if(is.null(activity) == FALSE){
     if(activity %in% c('agriculture', 'energy', 'land use change', 'industry', 'waste') == FALSE){
       stop('\n
@@ -37,8 +36,7 @@ get_seeg <- function(state = NULL, activity = NULL, gas = NULL, type_data = NULL
     }
   }
   print('----- Wait for the data to download! -----')
-  download.file('https://github.com/Helson-Gomes/dadostse/raw/master/SEEG.xlsx', temp, quiet = T)
-  data <- readxl::read_excel(temp, 1)
+  data <- openxlsx::read.xlsx('https://github.com/Helson-Gomes/dadostse/raw/master/SEEG.xlsx')
   data <- dplyr::rename(data, setor = 1)
   if(is.null(state) == FALSE){
     data<- subset(data, Estado == state)
@@ -88,7 +86,6 @@ get_seeg <- function(state = NULL, activity = NULL, gas = NULL, type_data = NULL
   ------------------------ \n
   Please, cite seeg.eco.br \n
   ------------------------')
-  unlink(temp)
   return(data)
 }
 

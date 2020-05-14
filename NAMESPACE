@@ -1,5 +1,4 @@
 exportPattern("^[[:alpha:]]+")
 importFrom("stats", "filter")
 importFrom("utils", "read.csv2")
-importFrom("utils", "download.file")
 importFrom("utils", "globalVariables")

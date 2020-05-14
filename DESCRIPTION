@@ -2,16 +2,18 @@ Package: BReco
 Type: Package
 Title: R Package to Download and Clean Brazilian Environmental Data
 Version: 0.1.0
-Author: Helson Gomes de Souza
+Authors@R: person("Helson Gomes de", "Souza", email = "helson@alu.ufc.br",
+                  role = c("aut", "cre"))
 Maintainer: Helson Gomes de Souza <helson@alu.ufc.br>
 Description: With the BReco package, you can to download main brazilian environmental datasets directly to R in the data frame format. You can download and clean data on greenhouse gas emissions, climate data and deforestation information with a set of functions available in the package.
 License: GPL-3
+Depends: R (>= 3.1.2)
 Encoding: UTF-8
 LazyData: TRUE
 RoxygenNote: 7.0.2
-Repository: CRAN
+Repository: github
 BugReports: https://github.com/Helson-Gomes/BReco
 Imports: 
     dplyr,
     tidyr,
-    readxl
+    openxlsx

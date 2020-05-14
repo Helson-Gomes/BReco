@@ -1,6 +1,4 @@
 get_gfw <- function(type_data = NULL, level = NULL){
-  utils::globalVariables()
-  temp <- tempfile()
   if(is.null(type_data) == FALSE){
     if(is.null(level) == FALSE){
       if(level %in% c('Country', 'Subnational 1', 'Subnational 2') == FALSE){
@@ -22,8 +20,8 @@ get_gfw <- function(type_data = NULL, level = NULL){
       --------------------------------')
     }
     print('Please, wait for the data to download!')
-    download.file('https://gfw2-data.s3.amazonaws.com/country-pages/country_stats/download/BRA.xlsx', temp, quiet = T)
-    df <- readxl::read_excel(temp, sheet = paste(level, type_data))
+    df <- openxlsx::read.xlsx('https://gfw2-data.s3.amazonaws.com/country-pages/country_stats/download/BRA.xlsx', sheet = paste(level, type_data))
+
 
 
   }else{
@@ -32,7 +30,6 @@ get_gfw <- function(type_data = NULL, level = NULL){
     Please, choose a valide data type! \n
     ----------------------------------')
   }
-  unlink(temp)
   warning('\n
   ----------------------------------------------------------------------------------------------------\n
   Pleace, cite: \n
